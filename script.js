@@ -19,8 +19,6 @@ const badge = btnNotif ? btnNotif.querySelector('.badge') : null;
 
 
 
-
-
 // Créer la barre de recherche
 const searchBar = document.createElement('div');
 searchBar.id = 'search-bar';
@@ -1245,3 +1243,38 @@ window.filtrerCitations = function(cat, btn) {
 afficherCitation(baseCitations[0]);
 
 }); // FIN DOMContentLoaded
+
+
+
+
+
+function handleShare(btn) {
+  btn.classList.add('active-share');
+  btn.querySelector('span').textContent = 'Partagé !';
+  setTimeout(() => {
+    btn.classList.remove('active-share');
+    btn.querySelector('span').textContent = 'Partager';
+  }, 1800);
+}
+
+function handleFav(btn) {
+  btn.classList.toggle('active-fav');
+  btn.querySelector('span').textContent =
+    btn.classList.contains('active-fav') ? 'Favori ✓' : 'Favori';
+}
+
+function handleCopy(btn) {
+  const textElement = document.getElementById('motivation-text');
+  const text = textElement ? textElement.textContent.trim() : '';
+
+  if (text) {
+    navigator.clipboard?.writeText(text).catch(() => {});
+  }
+
+  btn.classList.add('active-copy');
+  btn.querySelector('span').textContent = 'Copié !';
+  setTimeout(() => {
+    btn.classList.remove('active-copy');
+    btn.querySelector('span').textContent = 'Copier';
+  }, 1800);
+}
