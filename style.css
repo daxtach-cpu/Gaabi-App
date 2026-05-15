@@ -1,0 +1,96 @@
+.neon-climb {
+    display: flex;
+    justify-content: center;
+    gap: 11px;
+    padding: 10px 0;
+    position: fixed !important;
+    top: 56px !important;
+    left: 0;
+    width: 100%;
+    z-index: 30;
+    pointer-events: none;
+}
+
+.neon-bar {
+    width: 10px;
+    height: 30px;
+    background: linear-gradient(to top, #ff00ff, #00ffff);
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff;
+    transform-origin: bottom;
+    animation: climbNeon 1.2s infinite ease-in-out;
+
+}
+
+
+.neon-bar:nth-child(1) { animation-delay: 0s; }
+.neon-bar:nth-child(2) { animation-delay: 0.2s; }
+.neon-bar:nth-child(3) { animation-delay: 0.4s; }
+.neon-bar:nth-child(4) { animation-delay: 0.6s; }
+.neon-bar:nth-child(5) { animation-delay: 0.8s; }
+.neon-bar:nth-child(6) { animation-delay: 0.9s; }
+.neon-bar:nth-child(7) { animation-delay: 1s; }
+
+@keyframes climbNeon {
+    0% {
+        transform: scaleY(0.3);
+        opacity: 0.5;
+    }
+    50% {
+        transform: scaleY(1);
+        opacity: 1;
+        box-shadow: 0 0 10px #ff00ff44, 0 0 16px #ff00ff57;
+    }
+    100% {
+        transform: scaleY(0.1);
+        opacity: 0.3;
+    }
+}
+    
+
+/* motivation box */
+#motivation-box {
+    background: radial-gradient(ellips at center, #2d4a6b 0%, 
+    #1e3a52 40%, #152d42 100%);
+    border: 1px solid rgb(93, 3, 121);
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(119, 10, 129, 0.363), inset 0 1px 0 rgba(122, 62, 150, 0.5);
+    
+}
+
+
+
+/* a l'interieur du carrer color etc, */
+#text-container {
+    background: #025557;
+    color: #b4b0b0;
+    border-radius: 5px;
+}
+
+
+/* GRANDE CARTE - remplace le blanc */
+.bg-white\/95 {
+    background: radial-gradient(
+        ellipse at center,
+        #0b233f 0%,
+        #081725 60%,
+        #131f2e 100%
+    ) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+
+
+#motivation-box {
+    background: rgba(255, 255, 255, 0.15) !important;
+    backdrop-filter: blur(10px) !important;
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+#motivation-text {
+    color: rgb(255, 255, 255) !important;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}

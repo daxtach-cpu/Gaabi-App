@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Gaabi-App | Neuro-Design</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#6366f1">
+  <script>
+     if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js') 
+      .then(() => {
+        console.log('Gaabi-App : service Worker Enregistrer !');
+      })
+      .catch((err) => { 
+        console.log('Erreur SW :', err);
+      });
+    }
+  </script>
+  
+  <style> 
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: #f8fafc;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: hidden;
+    }
+
+    .neuro-container {
+      border-bottom-left-radius: 28px;
+      border-bottom-right-radius: 28px;
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    }
+
+    .indicator-item {
+      transform: scale(0.8);
+    }
+
+    @layer base {
+      :root {
+        --p: 79 70% 60%;
+      }
+    }
+    
+    /* Correction pour la barre de défilement horizontale */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+    
+</head>
+  <body class="bg-slate-50">
+  <div class="navbar bg-white/90 backdrop-blur-md border-b border-white/10 px-2 py-1 sticky top-0 z-50 neuro-container">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h12" /> 
+          </svg>
+        </div>
+        <ul tabindex="-1" class="menu menu-sm dropdown-content bg-white/90 backdrop-blur-lg rounded-3xl mt-4 w-52 p-4 shadow-2xl border border-white/40">
+          <li><a class="py-3 font-medium">Homepage</a></li>
+          <li><a class="py-3 font-medium">Portfolio</a></li>
+          <li><a class="py-3 font-medium">About</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="navbar-center">
+      <a class="text-lg font-bold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          Gaabi-App
+      </a>
+    </div>
+
+    <div class="navbar-end gap-1">
+        <button id="btn-search" class="btn btn-ghost btn-circle">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /> 
+
+        </svg>
+      </button>
+     
+
+
+
+
+
+     
+        <button id="btn-notif" class="btn btn-ghost btn-circle relative">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> 
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 
+              14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 
+              17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /> 
+          </svg>
+          <span class="badge badge-xs badge-primary indicator-item animate-pulse absolute top-2 right-2"></span>
+      </button>
+    </div>
+  </div>   
+
+  <h1 id="salutation-text" class="text-center text-slate-907 font-bold text-xl">Gaabi !</h1>  
+    
+
+  
+
+  <div class="category-bar sticky top-16 left-0 w-full z-40 bg-white/80 backdrop-blur-sm py-3 border-b border-slate-100">
+      <div class="flex overflow-x-auto gap-2 px-4 no-scrollbar">
+          <button onclick="filtrerCitations('tout', this)" class="btn btn-sm rounded-full btn-outline btn-primary active">Tout</button>
+          <button onclick="filtrerCitations('courage', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Courage</button>
+          <button onclick="filtrerCitations('sagesse', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Sagesse</button>
+          <button onclick="filtrerCitations('lumiere', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Lumière</button>
+          <button onclick="filtrerCitations('richesse', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Richesse</button>
+          <button onclick="filtrerCitations('bonte', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Bonté</button>
+          <button onclick="filtrerCitations('determination', this)" class="btn btn-sm rounded-full btn-outline btn-primary">Détermination</button>
+      </div>
+  </div>
+
+
+  <div class="neon-climb"> 
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    <div class="neon-bar"></div>
+    </div>
+
+
+
+
+    <div class="max-w-md mx-auto min-h-screen flex flex-col">
+        </div>
+  <div class="fixed bottom-0 left-0 w-full px-5 pb-8 z-50">
+    <div class="bg-white/95 backdrop-blur-2xl rounded-[40px] shadow-2xl border border-white/50 p-6">
+      <div id="motivation-box" class="bg-slate-50 rounded-[30px] p-6 mb-4 shadow-inner border border-gray-100 flex flex-col items-center justify-center min-h-[100px]">
+        <div id="text-container" class="overflow-y-auto max-h-[120px] w-full text-center">
+          <p id="motivation-text" class="text-lg font-medium italic">"Appuyez sur play pour commencer votre journée..."</p>
+        </div>
+      </div>
+
+      <div class="px-2 mb-4">
+        <div class="relative w-full h-1.5 bg-slate-200 rounded-full overflow-hidden">
+          <div id="progress-fill" class="absolute top-0 left-0 h-full bg-primary transition-all duration-300" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between mt-2 text-[10px] font-bold text-slate-400 tracking-widest">
+          <span id="current-time">0:00</span>
+          <span id="total-duration">0:00</span>
+        </div>
+      </div>    
+
+      <div class="flex items-center justify-evenly">
+        <button id="btn-prev" class="btn btn-ghost btn-circle text-slate-400">⏮️</button>
+        <button id="btn-play" class="w-16 h-16 bg-primary text-white rounded-full shadow-lg
+         shadow-primary/40 flex items-center justify-center hover:scale-105 active:scale-95 transition-all">
+          <span class="text-2xl" id="play-icon">▶️</span>
+        </button>
+       <button id="btn-next" class="btn btn-ghost btn-circle text-slate-400">⏭️</button>
+      </div>
+    </div>  
+  </div>
+
+  <script src="script.js"></script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>   
+</html>
+
+
+
+
+
+
