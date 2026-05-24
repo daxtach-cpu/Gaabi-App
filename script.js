@@ -1592,3 +1592,145 @@ if (savedX && savedY) {
 
 
 
+// Sauvegarder favori
+function handleFav(btn) {
+  btn.classList.toggle('active-fav');
+  const estFavori = btn.classList.contains('active-fav');
+  btn.querySelector('span').textContent = estFavori ? 'Favori ✓' : 'Favori';
+
+  const texte = document.getElementById('motivation-text').textContent.trim();
+  let favoris = JSON.parse(localStorage.getItem('favoris')) || [];
+
+  if (estFavori) {
+    if (!favoris.find(f => f.texte === texte)) {
+      favoris.push({ texte });
+    }
+  } else {
+    favoris = favoris.filter(f => f.texte !== texte);
+  }
+  localStorage.setItem('favoris', JSON.stringify(favoris));
+}
+
+// Afficher favoris
+function afficherFavoris() {
+  let panneau = document.getElementById('panneau-favoris');
+  if (panneau) { panneau.remove(); return; }
+
+  const favoris = JSON.parse(localStorage.getItem('favoris')) || [];
+
+  panneau = document.createElement('div');
+  panneau.id = 'panneau-favoris';
+  panneau.style.cssText = `
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 99998;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  `;
+
+  panneau.innerHTML = `
+    <div style="
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      width: 88%;
+      max-height: 75vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    ">
+      <h2 style="
+        text-align: center;
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 20px;
+        font-size: 20px;
+      ">❤️ Mes Favoris (${favoris.length})</h2>
+
+      ${favoris.length === 0
+        ? `<p style="text-align:center; color:#999; padding:20px;">
+            😔 Aucun favori encore !<br>
+            <small>Appuie sur FAVORI pour en ajouter</small>
+           </p>`
+        : favoris.map((f, i) => `
+          <div style="
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            border-radius: 12px;
+            padding: 14px;
+            margin-bottom: 12px;
+          ">
+            <p style="
+              font-style: italic;
+              color: #333;
+              font-size: 15px;
+              margin: 0 0 10px 0;
+              line-height: 1.5;
+            ">"${f.texte}"</p>
+
+            <div style="display: flex; gap: 8px;">
+              <button onclick="lireFavori('${f.texte.replace(/'/g, "\\'")}')" style="
+                background: linear-gradient(135deg, #667eea, #764ba2);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 6px 14px;
+                cursor: pointer;
+              ">▶ Lire</button>
+
+              <button onclick="supprimerFavori(${i})" style="
+                background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 6px 14px;
+                cursor: pointer;
+              ">🗑 Supprimer</button>
+            </div>
+          </div>
+        `).join('')
+      }
+
+      <button onclick="document.getElementById('panneau-favoris').remove()" style="
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border: none;
+        border-radius: 14px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+      ">✕ Fermer</button>
+    </div>
+  `;
+
+  panneau.addEventListener('click', (e) => {
+    if (e.target === panneau) panneau.remove();
+  });
+
+  document.body.appendChild(panneau);
+}
+
+// Lire un favori
+function lireFavori(texte) {
+  document.getElementById('panneau-favoris').remove();
+  document.getElementById('motivation-text').textContent = texte;
+  lire(texte);
+}
+
+// Supprimer un favori
+function supprimerFavori(index) {
+  let favoris = JSON.parse(localStorage.getItem('favoris')) || [];
+  favoris.splice(index, 1);
+  localStorage.setItem('favoris', JSON.stringify(favoris));
+  document.getElementById('panneau-favoris').remove();
+  afficherFavoris();
+}
+
+
+
+

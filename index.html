@@ -77,14 +77,6 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.658);
 ">🌙</button>
 
-
-
-
-
-
-
-
-    
 </head>
   <body class="bg-slate-50">
   <div class="navbar bg-white/90 backdrop-blur-md border-b border-white/10 px-2 py-1 sticky top-0 z-50 neuro-container">
@@ -105,14 +97,14 @@
       </div>
     </div>
 
+    
 
 
 
-    <!-- 1. Le bouton dans votre Header (à l'endroit de votre souris) -->
-<button id="btnVoirFavoris" class="header-icon-btn">
-  <!-- Icône de cœur (Exemple avec SVG ou texte) -->
-  ❤️
-</button>
+ <button id="btnFavoris" onclick="afficherFavoris()">favoris</button> 
+
+
+    
 
 <!-- 2. La fenêtre des Favoris (cachée par défaut) -->
 <div id="modalFavoris" class="modal-container hidden">
@@ -129,7 +121,6 @@
 
 
 
-
      
 
     <div class="navbar-center">
@@ -138,9 +129,6 @@
     </a>
 </div>
    
-
-
-
 
 
 
@@ -166,7 +154,7 @@
     </div>
   </div>   
 
-  <h1 id="salutation-text" class="text-center text-slate-907 font-bold text-xl">Gaabi !</h1>  
+  <h1 id="salutation-text" class="text-center text-slate-907 font-bold text-xl">......</h1>  
     
 
   
@@ -207,10 +195,10 @@
 
     <div class="max-w-md mx-auto min-h-screen flex flex-col">
         </div>
-  <div class="fixed bottom-0 left-0 w-full px-5 pb-8 z-50">
+  <div class="fixed bottom-0 left-0 w-full px-4 pb-8 z-50">
 <div class="card__actions">
   <button class="card__btn" onclick="handleShare(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" 
+    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" 
     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/>
       <circle cx="6" cy="12" r="3"/>
@@ -222,7 +210,7 @@
   </button>
 
   <button class="card__btn" onclick="handleFav(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"
      stroke-linecap="round" stroke-linejoin="round">
       <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 
       1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
@@ -231,7 +219,7 @@
   </button>
 
   <button class="card__btn" onclick="handleCopy(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+    <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"
      stroke-linecap="round" stroke-linejoin="round">
       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
