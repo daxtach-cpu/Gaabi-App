@@ -169,10 +169,3 @@
 }
 
 
-/* the du fond d'ecran ou theme */
-.body.them {
-    background-image: url('assets/bacground.jpg');
-    background-size: cover;
-    background: center;
-}
-

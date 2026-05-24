@@ -1477,55 +1477,118 @@ function handleCopy(btn) {
 }
 
 
-// Demander permission notfication 
-async function demanderPermissionNotif() {
-    if ('Notification' in window) {
-        await Notification.requestPermission();
 
-    }
+
+// function de la theme du fond d'ecran
+const themes = [
+  { nom: 'default', bg: 'bg-slate-50', image: '' },
+  { nom: 'cyan', bg: 'bg-slate-50', image: 'assets/bacground.jpg' }
+];
+
+let themeActuel = parseInt(localStorage.getItem('themeIndex')) || 0;
+
+// Appliquer au chargement
+appliquerTheme(themeActuel);
+
+function appliquerTheme(index) {
+  const theme = themes[index];
+  
+  // Changer la couleur
+  document.body.className = theme.bg;
+  
+  // Changer l'image de fond
+  if (theme.image) {
+    document.body.style.backgroundImage = `url('${theme.image}')`;
+    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundPosition = 'center';
+    document.body.style.backgroundAttachment = 'fixed';
+  } else {
+    document.body.style.backgroundImage = '';
+  }
+  
+  // Sauvegarder
+  localStorage.setItem('themeIndex', index);
 }
-
-// afficher notification avec button stop 
-function afficherNotifLectur(texte) {
-    if (Notification.permission === 'granted') {
-        const notif = new Notification('🎧 Gaabi-App', {
-            body: texte,
-            icon: '/assets/icon.png',
-            tag: 'lecture-en-cours',
-            renotify: true,
-            actions: [
-                {action: 'stop', title: '⏹ Arrêter'}
-            ]
-        });
-   notif.onclick = () => {
-    window.focus();
-   };
-    }
-}
-
-// au démarrer de l'app 
-demanderPermissionNotif();
-// quand une cituation commence a etre lue 
-function lire(texte) {
-    // mon code existant 
-    afficherNatifLecture(texte);
-}
-
-
-const theme = ['default', 'cyan'];
-let themeActuel = localStorage.getItem('theme') || 'default';
 
 function changerTheme() {
-    const idx = themes.indexOf(themeActuel);
-    themeActuel = themes[(idx + 1 ) % themes.length];
-
-    document.body.className = themesActuel === 'cyan'
-    ? 'bg-slate-50 theme-cyan'
-    : 'bg-slate-50';
-    localStorage.setItem('theme', themeActuel);
+  themeActuel = (themeActuel + 1) % themes.length;
+  appliquerTheme(themeActuel);
 }
 
-// Appliquer le theme sauvegarder 
-document.body.className = themeActuel === 'cyan'
-? 'bg-slate-50 theme-cyan'
-: 'bg-slate-50';
+
+
+// BOUTON FLOTTANT DRAGGABLE
+const btnTheme = document.getElementById('btnTheme');
+let isDragging = false;
+let offsetX, offsetY;
+let startX, startY;
+
+// SOURIS
+btnTheme.addEventListener('mousedown', (e) => {
+  isDragging = false;
+  startX = e.clientX;
+  startY = e.clientY;
+  offsetX = e.clientX - btnTheme.offsetLeft;
+  offsetY = e.clientY - btnTheme.offsetTop;
+  btnTheme.style.cursor = 'grabbing';
+  e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+  if (!btnTheme.matches(':active')) return;
+  isDragging = true;
+  btnTheme.style.left = (e.clientX - offsetX) + 'px';
+  btnTheme.style.top = (e.clientY - offsetY) + 'px';
+  btnTheme.style.right = 'auto';
+});
+
+document.addEventListener('mouseup', () => {
+  btnTheme.style.cursor = 'grab';
+  sauvegarderPosition();
+});
+
+// TACTILE (mobile)
+btnTheme.addEventListener('touchstart', (e) => {
+  const touch = e.touches[0];
+  isDragging = false;
+  startX = touch.clientX;
+  startY = touch.clientY;
+  offsetX = touch.clientX - btnTheme.offsetLeft;
+  offsetY = touch.clientY - btnTheme.offsetTop;
+  e.preventDefault();
+}, { passive: false });
+
+btnTheme.addEventListener('touchmove', (e) => {
+  const touch = e.touches[0];
+  isDragging = true;
+  btnTheme.style.left = (touch.clientX - offsetX) + 'px';
+  btnTheme.style.top = (touch.clientY - offsetY) + 'px';
+  btnTheme.style.right = 'auto';
+  e.preventDefault();
+}, { passive: false });
+
+btnTheme.addEventListener('touchend', (e) => {
+  if (!isDragging) {
+    changerTheme(); // clic simple = changer thème
+  }
+  sauvegarderPosition();
+});
+
+// SAUVEGARDER POSITION
+function sauvegarderPosition() {
+  localStorage.setItem('btnX', btnTheme.style.left);
+  localStorage.setItem('btnY', btnTheme.style.top);
+}
+
+// RESTAURER POSITION
+const savedX = localStorage.getItem('btnX');
+const savedY = localStorage.getItem('btnY');
+if (savedX && savedY) {
+  btnTheme.style.left = savedX;
+  btnTheme.style.top = savedY;
+  btnTheme.style.right = 'auto';
+}
+
+
+
+

@@ -36,8 +36,8 @@
     }
 
     .neuro-container {
-      border-bottom-left-radius: 28px;
-      border-bottom-right-radius: 28px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
     }
 
@@ -60,6 +60,30 @@
       scrollbar-width: none;
     }
   </style>
+
+
+<button id="btnTheme" onclick="changerTheme()" style="
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  background: rgba(127, 35, 139, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  font-size: 20px;
+  cursor: grab;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.658);
+">🌙</button>
+
+
+
+
+
+
+
+
     
 </head>
   <body class="bg-slate-50">
@@ -71,6 +95,8 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h12" /> 
           </svg>
         </div>
+
+      
         <ul tabindex="-1" class="menu menu-sm dropdown-content bg-white/90 backdrop-blur-lg rounded-3xl mt-4 w-52 p-4 shadow-2xl border border-white/40">
           <li><a class="py-3 font-medium">Homepage</a></li>
           <li><a class="py-3 font-medium">Portfolio</a></li>
@@ -79,11 +105,46 @@
       </div>
     </div>
 
+
+
+
+    <!-- 1. Le bouton dans votre Header (à l'endroit de votre souris) -->
+<button id="btnVoirFavoris" class="header-icon-btn">
+  <!-- Icône de cœur (Exemple avec SVG ou texte) -->
+  ❤️
+</button>
+
+<!-- 2. La fenêtre des Favoris (cachée par défaut) -->
+<div id="modalFavoris" class="modal-container hidden">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Mes Citations Favorites</h3>
+      <button id="btnFermerFavoris">✕</button>
+    </div>
+    <!-- C'est ici que les citations favorites vont s'afficher dynamiquement -->
+    <div id="listeFavoris" class="liste-favoris-content"></div>
+  </div>
+</div>
+    
+
+
+
+
+     
+
     <div class="navbar-center">
       <a class="text-lg font-bold tracking-tight bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
           Gaabi-App
-      </a>
-    </div>
+    </a>
+</div>
+   
+
+
+
+
+
+
+
 
     <div class="navbar-end gap-1">
         <button id="btn-search" class="btn btn-ghost btn-circle">
@@ -149,7 +210,8 @@
   <div class="fixed bottom-0 left-0 w-full px-5 pb-8 z-50">
 <div class="card__actions">
   <button class="card__btn" onclick="handleShare(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" 
+    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/>
       <circle cx="6" cy="12" r="3"/>
       <circle cx="18" cy="19" r="3"/>
@@ -160,14 +222,17 @@
   </button>
 
   <button class="card__btn" onclick="handleFav(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 
+      1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
     </svg>
     <span>Favori</span>
   </button>
 
   <button class="card__btn" onclick="handleCopy(this)">
-    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
+     stroke-linecap="round" stroke-linejoin="round">
       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
       <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
     </svg>
@@ -203,7 +268,7 @@
       </div>
     </div>  
   </div>
- <button onclick="changerTheme()">🌙 Theme</button>
+ 
   
  <script src="citations.js"></script>
   <script src="script.js"></script>
