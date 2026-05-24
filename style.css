@@ -51,19 +51,19 @@
 /* motivation box */
 #motivation-box {
     background: radial-gradient(ellips at center, #2d4a6b 0%, 
-    #1e3a52 40%, #152d42 100%);
+    #244461 40%, #517594 100%);
     border: 1px solid rgb(93, 3, 121);
     border-radius: 15px;
     box-shadow: 0 5px 20px rgba(119, 10, 129, 0.363), inset 0 1px 0 rgba(122, 62, 150, 0.5);
-    
+   
 }
 
 
 
 /* a l'interieur du carrer color etc, */
 #text-container {
-    background: #025557;
-    color: #b4b0b0;
+    background: linear-gradient(135deg, #af43b3, #114e5a);
+    color: #16203b;
     border-radius: 5px;
 }
 
@@ -72,19 +72,22 @@
 .bg-white\/95 {
     background: radial-gradient(
         ellipse at center,
-        #0b233f 0%,
+        #1c2838 0%,
         #081725 60%,
         #131f2e 100%
     ) !important;
     border: 1px solid rgba(255,255,255,0.08) !important;
+    background: linear-gradient(135deg, #e24747, #8a5278);
 }
 
 
 
+   
+
 #motivation-box {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(255, 255, 255, 0.5) !important;
     backdrop-filter: blur(10px) !important;
-    color: white !important;
+    color: rgb(250, 250, 250) !important;
     border: 1px solid rgba(255,255,255,0.2) !important;
 }
 
@@ -179,12 +182,13 @@
     z-index: 999;
     background: linear-gradient(135deg, #e24747, #0698db);
     border-radius: 3px;
-    border: 1px solid rgb(186, 22, 236);
+    border: 1px solid rgb(171, 50, 207);
     width: 50px;
     height: 30px;
     font-size: 15px;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(255, 107, 107, 0.5);
+   
 }
 
 .dropdown-content {
@@ -197,6 +201,7 @@
     width: 140px !important;
     font-size: 13px !important;
     padding: 0.9px !important;
+    background: linear-gradient(130deg, #262262, #f16623);
 }
 
 .dropdown-content li a {
@@ -204,3 +209,17 @@
     font-size: 13px !important;
     display: black;
 }
+
+
+/* style pour les button cat */ 
+.bg-white\/80 {
+    background: linear-gradient(130deg, #8a89a0be, #9909acbd);
+   
+    
+}
+
+/* style pour la nav-bar */
+.bg-white\/90 {
+    background: linear-gradient(130deg, #1bb3abd2, #b043d1ce);
+}
+
