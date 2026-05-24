@@ -1475,3 +1475,57 @@ function handleCopy(btn) {
     btn.querySelector('span').textContent = 'Copier';
   }, 1800);
 }
+
+
+// Demander permission notfication 
+async function demanderPermissionNotif() {
+    if ('Notification' in window) {
+        await Notification.requestPermission();
+
+    }
+}
+
+// afficher notification avec button stop 
+function afficherNotifLectur(texte) {
+    if (Notification.permission === 'granted') {
+        const notif = new Notification('🎧 Gaabi-App', {
+            body: texte,
+            icon: '/assets/icon.png',
+            tag: 'lecture-en-cours',
+            renotify: true,
+            actions: [
+                {action: 'stop', title: '⏹ Arrêter'}
+            ]
+        });
+   notif.onclick = () => {
+    window.focus();
+   };
+    }
+}
+
+// au démarrer de l'app 
+demanderPermissionNotif();
+// quand une cituation commence a etre lue 
+function lire(texte) {
+    // mon code existant 
+    afficherNatifLecture(texte);
+}
+
+
+const theme = ['default', 'cyan'];
+let themeActuel = localStorage.getItem('theme') || 'default';
+
+function changerTheme() {
+    const idx = themes.indexOf(themeActuel);
+    themeActuel = themes[(idx + 1 ) % themes.length];
+
+    document.body.className = themesActuel === 'cyan'
+    ? 'bg-slate-50 theme-cyan'
+    : 'bg-slate-50';
+    localStorage.setItem('theme', themeActuel);
+}
+
+// Appliquer le theme sauvegarder 
+document.body.className = themeActuel === 'cyan'
+? 'bg-slate-50 theme-cyan'
+: 'bg-slate-50';
