@@ -27,39 +27,7 @@
     }
   </script>
   
-  <style> 
-    body {
-      font-family: 'Outfit', sans-serif;
-      background-color: #f8fafc;
-      -webkit-tap-highlight-color: transparent;
-      overflow-x: hidden;
-    }
-
-    .neuro-container {
-      border-bottom-left-radius: 10px;
-      border-bottom-right-radius: 10px;
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
-    }
-
-    .indicator-item {
-      transform: scale(0.8);
-    }
-
-    @layer base {
-      :root {
-        --p: 79 70% 60%;
-      }
-    }
-    
-    /* Correction pour la barre de défilement horizontale */
-    .no-scrollbar::-webkit-scrollbar {
-      display: none;
-    }
-    .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-  </style>
+ 
 
 
 <button id="btnTheme" onclick="changerTheme()" style="
@@ -87,19 +55,18 @@
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h12" /> 
           </svg>
         </div>
-
-      
-        <ul tabindex="-1" class="menu menu-sm dropdown-content bg-white/90 backdrop-blur-lg rounded-3xl mt-4 w-52 p-4 shadow-2xl border border-white/40">
-          <li><a class="py-3 font-medium">Homepage</a></li>
+       
+<ul tabindex="-1" class="menu menu-sm dropdown-content bg-white/90 backdrop-blur-lg rounded-3xl mt-4 w-52 p-4 shadow-2xl border border-white/40">
+       <li><a class="py-3 font-medium">Home</a></li>
           <li><a class="py-3 font-medium">Portfolio</a></li>
-          <li><a class="py-3 font-medium">About</a></li>
+          <li><a class="py-3 font-medium" onclick="openAbout()">About</a></li>
         </ul>
       </div>
     </div>
 
-    
 
 
+  
 
  <button id="btnFavoris" onclick="afficherFavoris()">favoris</button> 
 
@@ -304,7 +271,7 @@
 
  
  
-
+<script src="Gaabi-App.js"></script>
 
 </body>   
 </html>
